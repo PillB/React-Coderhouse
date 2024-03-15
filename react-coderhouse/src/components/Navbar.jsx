@@ -1,10 +1,10 @@
 // Navbar code
 import React from 'react';
-import { CartWidget } from './CartWidget'; // Make sure to create this component
+import { CartWidget } from './CartWidget';
 
-const NavBar = () => {
+export const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <>
       <h8>Agilito</h8>
       <ul>
         <li><a href="">Categoria 1</a></li>
@@ -12,7 +12,7 @@ const NavBar = () => {
         <li><a href="">Categoria 3</a></li>
       </ul>
       <CartWidget />
-    </nav>
+    </>
   );
 };
 
