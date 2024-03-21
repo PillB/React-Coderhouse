@@ -1,8 +1,8 @@
 // ItemListContainer code
 import React from 'react';
 
-export const ItemListContainer = ({ greeting }) => {
-  return <div>{greeting}</div>;
+export const ItemListContainer = ( props ) => {
+  return <div>{props.greeting}</div>;
 };
 
 export default ItemListContainer;
