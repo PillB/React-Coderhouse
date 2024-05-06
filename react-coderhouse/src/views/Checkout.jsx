@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../FirebaseConfig.jsx';
 import { collection, addDoc } from "firebase/firestore";
 import { Button, Form, Alert } from 'react-bootstrap';
-import { CartContext } from './context/CartContext.jsx';
+import { CartContext } from '../context/cartContext.jsx';
 
 export const Checkout = () => {
   const [order, setOrder] = useState({

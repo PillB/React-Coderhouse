@@ -8,3 +8,5 @@ export const Error404 = () => {
 		</Container>
 	)
 }
+
+export default Error404;
