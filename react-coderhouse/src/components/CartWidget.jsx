@@ -1,4 +1,4 @@
-// CartWidget code
+// src/components/CartWidget.jsx
 import React from 'react';
 
 export const CartWidget = () => {

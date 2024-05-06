@@ -1,3 +1,4 @@
+// src/views/Home.jsx
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Container, Card, Button } from "react-bootstrap"
