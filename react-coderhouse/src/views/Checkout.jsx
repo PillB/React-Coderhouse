@@ -1,7 +1,7 @@
-// src/components/Checkout.jsx
+// src/views/Checkout.jsx
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../FirebaseConfig.jsx';
 import { collection, addDoc } from "firebase/firestore";
 import { Button, Form, Alert } from 'react-bootstrap';
 import { CartContext } from './context/CartContext.jsx';
