@@ -1,33 +1,46 @@
 // src/views/Detail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { db } from './firebaseConfig';
+import { db } from '../FirebaseConfig';
 import { doc, getDoc } from "firebase/firestore";
 import { Container, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export const Detail = () => {
-    const { orderId } = useParams();
+    const { id: orderId } = useParams();  // Correct parameter extraction
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        const getOrder = async () => {
-            const orderDoc = doc(db, "orders", orderId);
-            const docSnap = await getDoc(orderDoc);
-            if (docSnap.exists()) {
-                setOrder(docSnap.data());
-                setLoading(false);
-            } else {
-                console.log("No such document!");
-                setLoading(false);
-            }
-        };
+        if (orderId) {
+            const getOrder = async () => {
+                try {
+                    const orderDoc = doc(db, "orders", orderId);
+                    const docSnap = await getDoc(orderDoc);
+                    if (docSnap.exists()) {
+                        setOrder(docSnap.data());
+                    } else {
+                        console.log("No such document!");
+                        setError("No order found with the provided ID.");
+                    }
+                    setLoading(false);
+                } catch (err) {
+                    console.error("Firestore read error:", err);
+                    setError("Failed to load order details.");
+                    setLoading(false);
+                }
+            };
 
-        getOrder();
+            getOrder();
+        }
     }, [orderId]);
 
     if (loading) {
         return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <Container><Alert variant="danger">{error}</Alert></Container>;
     }
 
     return (

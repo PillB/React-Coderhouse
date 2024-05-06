@@ -3,16 +3,18 @@ import React, { useContext } from 'react';
 import { CartContext } from '../context/cartContext';
 
 export const CartWidget = () => {
-    const context = useContext(CartContext);
-
-    if (!context) {
-        console.error('CartWidget must be used within a CartProvider');
-        return null;
-    }
-
-    const { cartItems } = context;
+    const { cartItems } = useContext(CartContext);
     const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-    const itemDetails = cartItems.map(item => `${item.quantity} x ${item.name}`).join(', ');
+
+    const itemDetails = cartItems.reduce((acc, item) => {
+        const title = item.title || 'Unknown Item';
+        acc[title] = (acc[title] || 0) + item.quantity;
+        return acc;
+    }, {});
+
+    const formattedItemDetails = Object.entries(itemDetails)
+        .map(([title, qty]) => `${qty} x ${title}`)
+        .join(', ');
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -20,7 +22,7 @@ export const CartWidget = () => {
             {itemCount > 0 && (
                 <>
                     <span>{itemCount} items</span>
-                    <span>({itemDetails})</span>
+                    <span>({formattedItemDetails})</span>
                 </>
             )}
         </div>
