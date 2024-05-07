@@ -1,6 +1,6 @@
 //src/components/NavBar.jsx
 import React, { useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { db } from '../FirebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
@@ -8,16 +8,29 @@ import CartWidget from './CartWidget';
 
 const NavBar = () => {
     const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
-            const querySnapshot = await getDocs(collection(db, "categories"));
-            const categoryList = querySnapshot.docs.map(doc => doc.data().name);
-            setCategories(categoryList);
+            try {
+                const querySnapshot = await getDocs(collection(db, "categories"));
+                const categoryList = querySnapshot.docs.map(doc => {
+                    console.log(doc.data());  // Debug: Log each category data
+                    return doc.data().name;
+                });
+                setCategories(categoryList);
+                console.log(categoryList);  // Debug: Log fetched categories list
+            } catch (error) {
+                console.error("Error fetching categories: ", error);
+            }
         };
 
         fetchCategories();
     }, []);
+
+    const handleCategoryClick = (category) => {
+        navigate(`/?category=${category}`);
+    };
 
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -26,12 +39,15 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={NavLink} to="/">All Items</Nav.Link>
-                        {categories.map(category => (
-                            <Nav.Link key={category} as={NavLink} to={`/?category=${category}`}>
-                                {category}
-                            </Nav.Link>
-                        ))}
+                        {categories.length > 0 ? (
+                            categories.map(category => (
+                                <Nav.Link key={category} onClick={() => handleCategoryClick(category)}>
+                                    {category}
+                                </Nav.Link>
+                            ))
+                        ) : (
+                            <p>No categories found</p>  // Debug: Display when no categories are fetched
+                        )}
                         <Nav.Link as={NavLink} to="/checkout">
                             <CartWidget />
                         </Nav.Link>
@@ -43,4 +59,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

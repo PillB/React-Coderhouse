@@ -1,10 +1,11 @@
 //src/views/Home.jsx
-import React, { useContext } from 'react';
-import { CategoryContext } from '../context/categoryContext';
+import React from 'react';
+import { useSearchParams } from "react-router-dom";
 import ItemListContainer from '../components/ItemListContainer';
 
 const Home = () => {
-  const { category } = useContext(CategoryContext);
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
 
   return (
     <div>
@@ -14,4 +15,3 @@ const Home = () => {
 };
 
 export default Home;
-
