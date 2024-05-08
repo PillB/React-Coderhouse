@@ -7,47 +7,41 @@ import { Button, Form, Alert, ListGroup } from 'react-bootstrap';
 import { CartContext } from '../context/cartContext';
 
 export const Checkout = () => {
-    const [order, setOrder] = useState({
-        name: '',
-        email: '',
-        confirmEmail: '',
-        phone: '',
-        address: ''
-    });
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
-    const { cartItems, total, clearCart } = useContext(CartContext);
+  const [order, setOrder] = useState({
+      name: '', email: '', confirmEmail: '', phone: '', address: ''
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { cartItems, total, clearCart } = useContext(CartContext);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setOrder(prev => ({ ...prev, [name]: value }));
-        setError('');
-    };
+  console.log("Cart items in checkout:", cartItems);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (order.email !== order.confirmEmail) {
-            setError('Emails do not match!');
-            return;
-        }
-        const fullOrder = {
-            buyer: order,
-            items: cartItems,
-            total,
-            date: new Date().toISOString()
-        };
+  const handleChange = (e) => {
+      const { name, value } = e.target;
+      setOrder(prev => ({ ...prev, [name]: value }));
+  };
 
-        const orderCollection = collection(db, "orders");
-        addDoc(orderCollection, fullOrder)
-            .then(({ id }) => {
-                clearCart();
-                navigate(`/detail/${id}`);
-            })
-            .catch(error => {
-                console.error("Error adding document: ", error);
-                setError('Failed to submit order. Please try again.');
-            });
-    };
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      if (order.email !== order.confirmEmail) {
+          setError('Emails do not match!');
+          return;
+      }
+      const fullOrder = {
+          buyer: order, items: cartItems, total, date: new Date().toISOString()
+      };
+
+      const orderCollection = collection(db, "orders");
+      addDoc(orderCollection, fullOrder)
+          .then(({ id }) => {
+              clearCart();
+              navigate(`/detail/${id}`);
+          })
+          .catch(error => {
+              console.error("Error adding document: ", error);
+              setError('Failed to submit order. Please try again.');
+          });
+  };
 
     return (
         <Form onSubmit={handleSubmit}>

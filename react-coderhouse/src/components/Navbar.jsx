@@ -11,21 +11,24 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchItemsAndExtractCategories = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, "categories"));
-                const categoryList = querySnapshot.docs.map(doc => {
-                    console.log(doc.data());  // Debug: Log each category data
-                    return doc.data().name;
+                const querySnapshot = await getDocs(collection(db, "items"));
+                const extractedCategories = new Set();
+                querySnapshot.forEach(doc => {
+                    const itemData = doc.data();
+                    if (itemData.category) {
+                        extractedCategories.add(itemData.category);
+                    }
                 });
-                setCategories(categoryList);
-                console.log(categoryList);  // Debug: Log fetched categories list
+                setCategories([...extractedCategories]); // Convert Set to Array
+                console.log([...extractedCategories]); // Debug: Log categories
             } catch (error) {
-                console.error("Error fetching categories: ", error);
+                console.error("Error fetching items and extracting categories: ", error);
             }
         };
 
-        fetchCategories();
+        fetchItemsAndExtractCategories();
     }, []);
 
     const handleCategoryClick = (category) => {
@@ -39,15 +42,11 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        {categories.length > 0 ? (
-                            categories.map(category => (
-                                <Nav.Link key={category} onClick={() => handleCategoryClick(category)}>
-                                    {category}
-                                </Nav.Link>
-                            ))
-                        ) : (
-                            <p>No categories found</p>  // Debug: Display when no categories are fetched
-                        )}
+                        {categories.map(category => (
+                            <Nav.Link key={category} onClick={() => handleCategoryClick(category)}>
+                                {category}
+                            </Nav.Link>
+                        ))}
                         <Nav.Link as={NavLink} to="/checkout">
                             <CartWidget />
                         </Nav.Link>
@@ -59,3 +58,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
