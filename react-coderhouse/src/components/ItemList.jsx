@@ -8,7 +8,7 @@ const ItemList = ({ items }) => {
     <div className="d-flex flex-wrap">
       {items.map(item => (
         <Card key={item.id} className="m-2" style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={item.image} height="200" />
+          <Card.Img variant="top" src={item.image} height="200"  className="responsive-img"/>
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>
             <Card.Text>{item.description}</Card.Text>

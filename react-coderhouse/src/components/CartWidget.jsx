@@ -4,10 +4,14 @@ import { CartContext } from '../context/cartContext';
 
 export const CartWidget = () => {
   const { cartItems } = useContext(CartContext);
+  console.log("Received cartItems:",cartItems)
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const itemDetails = useMemo(() => cartItems.reduce((acc, item) => {
+    console.log("From cartItem got item:",item)
+    console.log("From cartItem got acc:",acc)
       acc[item.title] = (acc[item.title] || 0) + item.quantity;
+      console.log("From cartItem got acc after:",acc)
       return acc;
   }, {}), [cartItems]);
 

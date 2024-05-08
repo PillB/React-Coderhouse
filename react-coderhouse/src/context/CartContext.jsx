@@ -7,22 +7,20 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (product) => {
+        console.log("Cart input product:",product)
         setCartItems(prevItems => {
-            const existingIndex = prevItems.findIndex(item => item.id === product.id);
-            if (existingIndex >= 0) {
-                // Deep copy and update the item if it exists
-                const updatedItems = [...prevItems];
-                updatedItems[existingIndex] = {
-                    ...updatedItems[existingIndex],
-                    quantity: updatedItems[existingIndex].quantity + 1
+            const itemIndex = prevItems.findIndex(item => item.title === product.title);
+            if (itemIndex !== -1) {
+                // Update the quantity for existing product
+                const newItems = [...prevItems];
+                newItems[itemIndex] = {
+                    ...newItems[itemIndex],
+                    quantity: newItems[itemIndex].quantity + product.quantity
                 };
-                console.log(`Updated quantity for ${product.title}:`, updatedItems);
-                return updatedItems;
-            } else {
-                // Add as new item
-                const newItems = [...prevItems, { ...product, quantity: 1 }];
-                console.log(`Added new product ${product.title}:`, newItems);
                 return newItems;
+            } else {
+                // Add new product with the provided quantity
+                return [...prevItems, { ...product, quantity: product.quantity }];
             }
         });
     };

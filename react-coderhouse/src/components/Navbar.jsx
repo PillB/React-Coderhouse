@@ -8,6 +8,7 @@ import CartWidget from './CartWidget';
 
 const NavBar = () => {
     const [categories, setCategories] = useState([]);
+    const [expanded, setExpanded] = useState(false);  // State to handle the expansion
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,8 +22,7 @@ const NavBar = () => {
                         extractedCategories.add(itemData.category);
                     }
                 });
-                setCategories([...extractedCategories]); // Convert Set to Array
-                console.log([...extractedCategories]); // Debug: Log categories
+                setCategories([...extractedCategories]);
             } catch (error) {
                 console.error("Error fetching items and extracting categories: ", error);
             }
@@ -33,13 +33,14 @@ const NavBar = () => {
 
     const handleCategoryClick = (category) => {
         navigate(`/?category=${category}`);
+        setExpanded(false);  // Collapse the navbar after category selection
     };
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" expanded={expanded}>
             <Container>
                 <Navbar.Brand as={NavLink} to="/">Agilito</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                {/*<Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")}/>*/}
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         {categories.map(category => (
@@ -58,4 +59,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

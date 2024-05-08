@@ -7,9 +7,12 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
 
+  // Create a conditional greeting based on whether a category is selected.
+  const greeting = category ? `Welcome to Agilito's store! Showing ${category}` : "Welcome to Agilito's store!";
+
   return (
     <div>
-      <ItemListContainer categoryId={category} greeting={`Welcome to Agilito's store! Showing ${category || "all items"}`} />
+      <ItemListContainer categoryId={category} greeting={greeting} />
     </div>
   );
 };

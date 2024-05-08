@@ -4,7 +4,7 @@ import ItemDetailContainer from '../components/ItemDetailContainer';
 
 const ProductDetail = () => {
     return (
-        <div>
+        <div className="form-container" >
             <ItemDetailContainer />
         </div>
     );
