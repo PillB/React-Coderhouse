@@ -1,42 +1,288 @@
+/* Base body styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Consistent dark background */
+  color: #ffffff; /* Ensuring legibility with light text */
+  font-family: 'Roboto', sans-serif; /* Modern, clean font */
+}
+
+/* Root container adjustments */
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
+/* Navbar specific styles */
+.navbar {
+  padding: 0.5rem 1rem; /* Reducing padding for a more compact nav */
+}
+
+.navbar-brand {
+  font-size: 2rem; /* Larger brand text */
+  font-weight: bold;
+}
+
+.navbar .navbar-nav .nav-link {
+  margin-right: 1rem; /* Ensure spacing between nav items */
+  border: none; /* Removing borders from nav links */
+}
+
+.navbar-toggler {
+  border: none; /* Hide default border */
+  outline: none; /* Remove focus outline */
+}
+
+/* Logo styles */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  height: 50px; /* Adjusting the logo height */
+  transition: filter 300ms; /* Smooth transition for hover effect */
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: brightness(1.2); /* Brighten the logo on hover */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Card styles for products */
 .card {
-  padding: 2em;
+  display: inline-block;
+  margin: 1rem;
+  padding: 0;
+  background-color: #222; /* Dark cards for contrast */
+  border: 1px solid #333; /* Slight border for definition */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
 
+.card img {
+  width: 100%; /* Full width images */
+  border-top-left-radius: 8px; /* Rounded corners on the top of images */
+  border-top-right-radius: 8px;
+}
+
+.card-title {
+  margin-top: 0.5rem;
+  font-size: 1.2rem; /* Larger, more legible titles */
+}
+
+.card-text {
+  font-size: 0.9rem; /* Slightly smaller text for less emphasis */
+  color: #ccc; /* Light gray for less contrast */
+}
+
+/* Button styling */
+button, .btn {
+  color: #ffffff; /* White text for visibility */
+  background-color: #646cff; /* Attractive purple theme */
+  border: none; /* No border */
+  padding: 10px 20px; /* Ample padding */
+  margin-bottom: 10px;
+  border-radius: 5px; /* Rounded edges */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+button:hover, .btn:hover {
+  background-color: #535bf2; /* Slightly darker on hover */
+}
+
+/* Form styling */
+form {
+  max-width: 90%;
+  margin: 20px auto; /* Center form and add vertical spacing */
+}
+.responsive-img {
+  max-height: 60%;
+  max-width: 90%;
+  width:auto;
+  height:auto;
+}
+form .form-group {
+  margin-bottom: 1rem; /* Space between form fields */
+}
+
+form .form-control {
+  font-size: 1.1rem; /* Larger font size for readability */
+  padding: 0.75rem; /* More padding for better touch interaction */
+  background-color: #333; /* Dark background for inputs */
+  color: #fff; /* Light text color */
+  border: 1px solid #444; /* Subtle border */
+}
+
+form .form-control:focus {
+  border-color: #646cff; /* Highlight focus with the theme color */
+  box-shadow: 0 0 0 0.2rem rgba(100, 108, 255, 0.25); /* Glow effect on focus */
+}
+
+/* Responsive adjustments for smaller devices */
+@media (max-width: 768px) {
+  .navbar-nav {
+    margin-bottom: 1rem; /* Extra space at the bottom of the collapsed menu */
+  }
+
+  .card {
+    width: 100%; /* Full width cards on small screens */
+    margin: 0.5rem 0; /* Reduced vertical margin on small devices */
+  }
+}
+
+/* Navbar specific styles */
+.navbar {
+  background-color: #121212; /* Dark background for the navbar */
+  padding: 0.5rem 1rem;
+  display: center; /* Center contents */
+}
+
+.navbar-brand, .navbar .navbar-nav .nav-link {
+  color: #ffffff; /* White text for visibility */
+  margin-bottom: 20px; /* Space between links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #ffffff; /* White text for visibility */
+  background-color: #646cff; /* Purple background consistent with buttons */
+  padding: 5px 10px; /* Padding to mimic button appearance */
+  margin-top: 20px; /* Space between links */
+  margin-right: 20px; /* Space between links */
+  border-radius: 5px; /* Rounded corners like buttons */
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar-brand:hover, .navbar .navbar-nav .nav-link:hover {
+  background-color: #535bf2; /* Darker purple on hover for feedback */
+}
+
+.navbar-toggler {
+  background-color: #646cff; /* Purple background for the toggle */
+  border: none;
+}
+
+.navbar-toggler:hover {
+  background-color: #535bf2; /* Darker purple on hover */
+}
+
+/* Adjusting navbar collapse */
+.navbar-collapse {
+  justify-content: flex-start; /* Aligns items to the left */
+}
+
+/* Ensure navbar items do not wrap onto the next line */
+.navbar-nav {
+  display: flex;
+  width: auto;
+  flex-wrap: nowrap; /* Prevent wrapping of navbar items */
+}
+
+/* Adjusting spacing for auto layout in navbar */
+.nav-item {
+  margin-right: 0.5rem; /* Right margin for nav items */
+}
+
+/* Styling for active state of nav links */
+.navbar .navbar-nav .nav-link.active {
+  background-color: #424242; /* Darker shade for active state */
+  color: #fff;
+}
+.nav-link{
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center contents */
+}
+/* Cart icon adjustments */
+.cart-checkout-link {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center contents */
+  margin-left: auto; /* Push to the end of the navbar */
+}
+
+/* Additional visual tweaks for aesthetic enhancement */
 .read-the-docs {
-  color: #888;
+  color: #888; /* Subdued color for secondary text */
+}
+
+/* Enhancing List Group used for order summaries */
+.list-group {
+  border-radius: 5px; /* Rounded corners for modern look */
+  background-color: #1e1e1e; /* Dark theme background */
+  border: 1px solid #646cff; /* Purple border to align with the theme */
+  padding: 1rem; /* Padding around the whole group for better spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  width: 100%; /* Optimal width for viewing */
+  margin: 20px auto; /* Centered and with vertical spacing */
+}
+
+.list-group-item {
+  color: #cccccc; /* Light gray for readability against the dark background */
+  background-color: transparent; /* No background to keep it sleek */
+  padding: 15px; /* Comfortable padding around the text */
+  border: none; /* Remove default borders */
+  margin-bottom: 10px; /* Space between items */
+  font-size: 1.2rem; /* Larger font size for better readability */
+}
+
+/* Last item in the list-group for special styling if needed */
+.list-group-item:last-child {
+  font-weight: bold; /* Make the total amount bold */
+  color: #ffffff; /* Brighter color for emphasis */
+}
+/* General Form Styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem; /* Ensure adequate spacing between form elements */
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive behavior for better handling on different devices */
+@media (min-width: 768px) {
+  .list-group {
+    width: 90%; /* More appropriate width on larger screens */
+  }
+  .form-control, .form {
+    width: 90%; /* More appropriate width on larger screens */
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  height: 100%; /* Adjust height as necessary */
+}
+
+.form-label {
+  display: block; /* Ensure labels are on their own line */
+  margin-bottom: 0.5rem; /* Space between label and input */
+  color: #ccc; /* Light gray color for the labels for a subtle contrast */
+  font-size: 1.1rem; /* Slightly larger font size for better readability */
+}
+
+.form-control {
+  display: block; /* Ensure inputs take the full line */
+  width: 100%; /* Full width to maximize the space in the form */
+  padding: 0.8rem; /* Comfortable padding inside the input */
+  margin-bottom: 0.5rem;
+  font-size: 1rem; /* Suitable font size for easy reading */
+  line-height: 1.5; /* Adequate line height for the content inside inputs */
+  color: #ffffff; /* White text color for visibility */
+  background-color: #333; /* Dark background to match the theme */
+  border: 2px solid #646cff; /* Purple border to maintain theme consistency */
+  border-radius: 5px; /* Rounded borders for modern look */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for interactions */
+}
+
+.form-control:focus {
+  border-color: #535bf2; /* Brighter purple when focused */
+  box-shadow: 0 0 8px rgba(98, 0, 234, 0.6); /* Glowing effect to indicate focus */
+  outline: none; /* Remove default focus outline */
 }
