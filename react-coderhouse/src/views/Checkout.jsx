@@ -24,6 +24,7 @@ export const Checkout = () => {
   const handleSubmit = (e) => {
       e.preventDefault();
       if (order.email !== order.confirmEmail) {
+          alert('Email do not match!');
           setError('Emails do not match!');
           return;
       }

@@ -219,7 +219,7 @@ form .form-control:focus {
 .list-group-item {
   color: #cccccc; /* Light gray for readability against the dark background */
   background-color: transparent; /* No background to keep it sleek */
-  padding: 15px; /* Comfortable padding around the text */
+  padding: 10px; /* Comfortable padding around the text */
   border: none; /* Remove default borders */
   margin-bottom: 10px; /* Space between items */
   font-size: 1.2rem; /* Larger font size for better readability */
